@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GeoIntel AI is an AI-powered geological and mining intelligence platform for ingesting survey data, predicting mineral potential, detecting risk and reporting.">
+  <meta name="theme-color" content="#050b16">
+  <title>OreMap – AI Powered Geological &amp; Mining Intelligence Platform</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page">
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <div class="page-bg" aria-hidden="true">
+    <div class="page-bg__grid"></div>
+    <div class="floating-orb floating-orb--one"></div>
+    <div class="floating-orb floating-orb--two"></div>
+    <div class="floating-orb floating-orb--three"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="#hero" aria-label="GeoIntel AI home">
+        <span class="brand__mark" aria-hidden="true"><span class="glow-ring"></span></span>
+        <span class="brand__name">OreMap AI <span class="brand__ai">AI</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="visually-hidden">Toggle navigation</span>
+      </button>
+      <nav class="site-nav" id="primary-nav" aria-label="Primary">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#ingestion">Ingestion</a></li>
+          <li><a class="site-nav__link" href="#processing">Processing</a></li>
+          <li><a class="site-nav__link" href="#prediction">Prediction</a></li>
+          <li><a class="site-nav__link" href="#risk">Risk</a></li>
+          <li><a class="site-nav__link" href="#gis">GIS</a></li>
+          <li><a class="site-nav__link" href="#report">Report</a></li>
+          <li><a class="site-nav__link" href="#assistant">Assistant</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="gradient-line" aria-hidden="true"></div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. HERO -->
+    <section class="section hero" id="hero" aria-labelledby="hero-title">
+      <div class="hero__decor" aria-hidden="true">
+        <div class="glow-ring glow-ring--lg"></div>
+        <div class="glow-ring glow-ring--md"></div>
+        <div class="floating-orb floating-orb--hero"></div>
+        <div class="hero__scanline"></div>
+      </div>
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="badge badge--live"><span class="badge__dot" aria-hidden="true"></span> Platform status: operational</p>
+          <h1 class="hero__title" id="hero-title">OreMap AI</h1>
+          <p class="hero__tagline">AI powered geological and mining intelligence</p>
+          <p class="hero__subtitle">Turn borehole logs, survey reports, maps and satellite imagery into one searchable model of the subsurface. Predict ore potential, flag hazards early and produce audit-ready reports in minutes.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#ingestion">Start analysis</a>
+            <a class="btn btn--secondary" href="#gis">Explore the map</a>
+          </div>
+        </div>
+
+        <dl class="stats" aria-label="Platform statistics">
+          <div class="stats__item card">
+            <span class="card-glow" aria-hidden="true"></span>
+            <dt class="stats__label">Boreholes analysed</dt>
+            <dd class="stats__value" data-count="48210">48,210</dd>
+          </div>
+          <div class="stats__item card">
+            <span class="card-glow" aria-hidden="true"></span>
+            <dt class="stats__label">Prediction accuracy</dt>
+            <dd class="stats__value" data-count="94.7">94.7%</dd>
+          </div>
+          <div class="stats__item card">
+            <span class="card-glow" aria-hidden="true"></span>
+            <dt class="stats__label">Survey area covered</dt>
+            <dd class="stats__value" data-count="1250000">1.25M km²</dd>
+          </div>
+          <div class="stats__item card">
+            <span class="card-glow" aria-hidden="true"></span>
+            <dt class="stats__label">Report turnaround</dt>
+            <dd class="stats__value" data-count="3">3 min</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="gradient-line" aria-hidden="true"></div>
+    </section>
+
+    <!-- 2. DATA INGESTION -->
+    <section class="section ingestion" id="ingestion" aria-labelledby="ingestion-title">
+      <div class="container">
+        <header class="section__header">
+          <p class="section__eyebrow">Data ingestion</p>
+          <h2 class="section__title" id="ingestion-title">Bring every source into one workspace</h2>
+          <p class="section__lead">Upload field data in any supported format. OreMap AI validates each file, extracts its content and links it to a location on the map.</p>
+        </header>
+
+        <div class="upload-grid">
+          <article class="card upload-card" data-upload="csv">
+            <span class="card-glow" aria-hidden="true"></span>
+            <div class="upload-card__icon" aria-hidden="true">CSV</div>
+            <h3 class="upload-card__title">CSV boreholes</h3>
+            <p class="upload-card__text">Collar, lithology, assay and depth logs.</p>
+            <p class="upload-card__meta">Accepted: .csv, .tsv · Up to 200 MB</p>
+            <label class="btn btn--ghost upload-card__btn" for="upload-csv">Choose file</label>
+            <input class="upload-card__input visually-hidden" id="upload-csv" type="file" accept=".csv,.tsv" multiple>
+            <div class="progress" role="progressbar" aria-label="CSV upload progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="progress__bar"></div>
+            </div>
+          </article>
+
+          <article class="card upload-card" data-upload="pdf">
+            <span class="card-glow" aria-hidden="true"></span>
+            <div class="upload-card__icon" aria-hidden="true">PDF</div>
+            <h3 class="upload-card__title">Survey PDFs</h3>
+            <p class="upload-card__text">Scanned or digital field reports and core logs.</p>
+            <p class="upload-card__meta">Accepted: .pdf · Up to 100 MB</p>
+            <label class="btn btn--ghost upload-card__btn" for="upload-pdf">Choose file</label>
+            <input class="upload-card__input visually-hidden" id="upload-pdf" type="file" accept=".pdf" multiple>
+            <div class="progress" role="progressbar" aria-label="PDF upload progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="progress__bar"></div>
+            </div>
+          </article>
+
+          <article class="card upload-card" data-upload="maps">
+            <span class="card-glow" aria-hidden="true"></span>
+            <div class="upload-card__icon" aria-hidden="true">MAP</div>
+            <h3 class="upload-card__title">Maps</h3>
+            <p class="upload-card__text">Geological maps, cross-sections and vector layers.</p>
+            <p class="upload-card__meta">Accepted: .geojson, .shp, .kml, .png</p>
+            <label class="btn btn--ghost upload-card__btn" for="upload-maps">Choose file</label>
+            <input class="upload-card__input visually-hidden" id="upload-maps" type="file" accept=".geojson,.json,.shp,.kml,.kmz,.png,.jpg" multiple>
+            <div class="progress" role="progressbar" aria-label="Map upload progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="progress__bar"></div>
+            </div>
+          </article>
+
+          <article class="card upload-card" data-upload="satellite">
+            <span class="card-glow" aria-hidden="true"></span>
+            <div class="upload-card__icon" aria-hidden="true">SAT</div>
+            <h3 class="upload-card__title">Satellite images</h3>
+            <p class="upload-card__text">Multispectral and hyperspectral scenes.</p>
+            <p class="upload-card__meta">Accepted: .tif, .tiff, .jp2 · Up to 2 GB</p>
+            <label class="btn btn--ghost upload-card__btn" for="upload-satellite">Choose file</label>
+            <input class="upload-card__input visually-hidden" id="upload-satellite" type="file" accept=".tif,.tiff,.jp2,.png,.jpg" multiple>
+            <div class="progress" role="progressbar" aria-label="Satellite image upload progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="progress__bar"></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-describedby="dropzone-hint">
+          <div class="dropzone__decor" aria-hidden="true">
+            <span class="glow-ring glow-ring--sm"></span>
+          </div>
+          <div class="dropzone__body">
+            <p class="dropzone__title">Drag and drop files here</p>
+            <p class="dropzone__hint" id="dropzone-hint">or press Enter to browse. OreMap AI detects the file type automatically.</p>
+            <input class="visually-hidden" id="dropzone-input" type="file" multiple aria-label="Select files to upload">
+          </div>
+        </div>
+
+        <div class="upload-queue" aria-live="polite">
+          <h3 class="upload-queue__title">Upload queue</h3>
+          <ul class="upload-queue__list" id="upload-queue">
+            <li class="upload-queue__empty">No files yet. Add a file to begin.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gradient-line" aria-hidden="true"></div>
+    </section>
+
+    <!-- 3. MULTI-MODAL AI PROCESSING -->
+    <section class="section processing" id="processing" aria-labelledby="processing-title">
+      <div class="container">
+        <header class="section__header">
+          <p class="section__eyebrow">Multi-modal AI processing</p>
+          <h2 class="section__title" id="processing-title">Three engines, one fused dataset</h2>
+          <p class="section__lead">Each file passes through the engine built for its format. The results are merged and cross-checked before any prediction runs.</p>
+        </header>
+
+        <ol class="pipeline">
+          <li class="pipeline__stage">
+            <article class="card pipeline__card">
+              <span class="card-glow" aria-hidden="true"></span>
+              <div class="pipeline__icon" aria-hidden="true"><span class="glow-ring glow-ring--sm"></span>OCR</div>
+              <h3 class="pipeline__title">OCR engine</h3>
+              <p class="pipeline__text">Reads scanned reports, handwritten core logs and tables. Outputs structured text with a confidence score per field.</p>
+              <ul class="tag-list" aria-label="OCR capabilities">
+                <li class="tag">Tables</li>
+                <li class="tag">Handwriting</li>
+                <li class="tag">Units</li>
+              </ul>
+              <div class="pipeline__status">
+                <span class="badge badge--ok">Ready</span>
+                <span class="pipeline__metric">98.2% character accuracy</span>
+              </div>
+            </article>
+          </li>
+
+          <li class="pipeline__connector" aria-hidden="true">
+            <span class="pipeline__line"></span>
+            <span class="pipeline__pulse"></span>
+          </li>
+
+          <li class="pipeline__stage">
+            <article class="card pipeline__card">
+              <span class="card-glow" aria-hidden="true"></span>
+              <div class="pipeline__icon" aria-hidden="true"><span class="glow-ring glow-ring--sm"></span>GEO</div>
+              <h3 class="pipeline__title">Geospatial extractor</h3>
+              <p class="pipeline__text">Pulls coordinates, projections and features from maps and imagery, then aligns them to a common coordinate system.</p>
+              <ul class="tag-list" aria-label="Geospatial extractor capabilities">
+                <li class="tag">Coordinates</li>
+                <li class="tag">Faults</li>
+                <li class="tag">Spectral bands</li>
+              </ul>
+              <div class="pipeline__status">
+                <span class="badge badge--ok">Ready</span>
+                <span class="pipeline__metric">±2.4 m alignment error</span>
+              </div>
+            </article>
+          </li>
+
+          <li class="pipeline__connector" aria-hidden="true">
+            <span class="pipeline__line"></span>
+            <span class="pipeline__pulse"></span>
+          </li>
+
+          <li class="pipeline__stage">
+            <article class="card pipeline__card pipeline__card--fusion">
+              <span class="card-glow" aria-hidden="true"></span>
+              <div class="pipeline__icon" aria-hidden="true"><span class="glow-ring glow-ring--sm"></span>AI</div>
+              <h3 class="pipeline__title">AI data fusion</h3>
+              <p class="pipeline__text">Merges text, spatial and tabular data into a single 3D subsurface model. Conflicting records are flagged for review.</p>
+              <ul class="tag-list" aria-label="Data fusion capabilities">
+                <li class="tag">3D model</li>
+                <li class="tag">Conflict checks</li>
+                <li class="tag">Provenance</li>
+              </ul>
+              <div class="pipeline__status">
+                <span class="badge badge--info">Processing</span>
+                <span class="pipeline__metric">12 records need review</span>
+              </div>
+            </article>
+          </li>
+        </ol>
+
+        <div class="pipeline-summary card">
+          <span class="card-glow" aria-hidden="true"></span>
+          <h3 class="pipeline-summary__title">Current batch</h3>
+          <div class="progress" role="progressbar" aria-label="Batch processing progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="72">
+            <div class="progress__bar" data-progress="72"></div>
+          </div>
+          <p class="pipeline-summary__text">72% complete · 1,846 of 2,564 documents processed</p>
+        </div>
+      </div>
+      <div class="gradient-line" aria-hidden="true"></div>
+    </section>
+
+    <!-- 4. ML MINERAL PREDICTION -->
+    <section class="section prediction" id="prediction" aria-labelledby="prediction-title">
+      <div class="container">
+        <header class="section__header">
+          <p class="section__eyebrow">ML mineral prediction</p>
+          <h2 class="section__title" id="prediction-title">Where the ore is, how deep, and how sure we are</h2>
+          <p class="section__lead">Models trained on regional deposits estimate grade potential and depth for the selected target zone.</p>
+        </header>
+
+        <div class="prediction-toolbar">
+          <div class="field">
+            <label class="field__label" for="target-mineral">Target mineral</label>
+            <select class="field__control" id="target-mineral">
+              <option>Copper</option>
+              <option>Gold</option>
+              <option>Lithium</option>
+              <option>Iron ore</option>
+              <option>Nickel</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field__label" for="target-zone">Target zone</label>
+            <select class="field__control" id="target-zone">
+              <option>Zone A – Northern belt</option>
+              <option>Zone B – Central basin</option>
+              <option>Zone C – Southern ridge</option>
+            </select>
+          </div>
+          <button class="btn btn--primary" type="button" id="run-prediction">Run prediction</button>
+        </div>
+
+        <div class="prediction-grid">
+          <article class="card metric-card" aria-labelledby="ore-title">
+            <span class="card-glow" aria-hidden="true"></span>
+            <h3 class="metric-card__title" id="ore-title">Ore potential</h3>
+            <div class="gauge" data-gauge="ore" role="img" aria-label="Ore potential gauge: 82 out of 100, high">
+              <div class="gauge__dial" aria-hidden="true">
+                <div class="gauge__fill" data-value="82"></div>
+                <div class="gauge__needle"></div>
+              </div>
+              <p class="gauge__value">82<span class="gauge__unit">/100</span></p>
+            </div>
+            <p class="metric-card__note"><span class="badge badge--ok">High</span> Strong match with known deposit signatures.</p>
+          </article>
+
+          <article class="card metric-card" aria-labelledby="depth-title">
+            <span class="card-glow" aria-hidden="true"></span>
+            <h3 class="metric-card__title" id="depth-title">Depth prediction</h3>
+            <div class="depth-chart" role="img" aria-label="Predicted depth range: 180 to 340 metres, most likely 260 metres">
+              <div class="depth-chart__scale" aria-hidden="true">
+                <span>0 m</span><span>150 m</span><span>300 m</span><span>450 m</span>
+              </div>
+              <div class="depth-chart__track" aria-hidden="true">
+                <div class="depth-chart__range"></div>
+                <div class="depth-chart__marker"></div>
+              </div>
+            </div>
+            <p class="metric-card__value">260 m <span class="metric-card__range">(180–340 m)</span></p>
+            <p class="metric-card__note">Most likely depth to top of mineralised zone.</p>
+          </article>
+
+          <article class="card metric-card" aria-labelledby="confidence-title">
+            <span class="card-glow" aria-hidden="true"></span>
+            <h3 class="metric-card__title" id="confidence-title">Confidence score</h3>
+            <div class="gauge gauge--ring" data-gauge="confidence" role="img" aria-label="Confidence score: 91 percent">
+              <div class="gauge__ring" aria-hidden="true" data-value="91">
+                <span class="glow-ring glow-ring--sm"></span>
+              </div>
+              <p class="gauge__value">91<span class="gauge__unit">%</span></p>
+            </div>
+            <p class="metric-card__note">Based on 3,120 comparable boreholes.</p>
+          </article>
+
+          <article class="card chart-card" aria-labelledby="grade-title">
+            <span class="card-glow" aria-hidden="true"></span>
+            <h3 class="metric-card__title" id="grade-title">Grade distribution</h3>
+            <div class="chart-placeholder" id="chart-grade" role="img" aria-label="Bar chart placeholder for predicted grade distribution">
+              <div class="chart-placeholder__bars" aria-hidden="true">
+                <span class="chart-placeholder__bar" data-height="35"></span>
+                <span class="chart-placeholder__bar" data-height="60"></span>
+                <span class="chart-placeholder__bar" data-height="85"></span>
+                <span class="chart-placeholder__bar" data-height="70"></span>
+                <span class="chart-placeholder__bar" data-height="45"></span>
+                <span class="chart-placeholder__bar" data-height="25"></span>
+              </div>
+              <p class="chart-placeholder__caption">Chart loads after prediction runs</p>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="gradient-line" aria-hidden="true"></div>
+    </section>
+
+    <!-- 5. RISK & ANOMALY DETECTION -->
+    <section class="section risk" id="risk" aria-labelledby="risk-title">
+      <div class="container">
+        <header class="section__header">
+          <p class="section__eyebrow">Risk and anomaly detection</p>
+          <h2 class="section__title" id="risk-title">Catch hazards before drilling starts</h2>
+          <p class="section__lead">The system compares new data against expected geology and highlights readings that need a geologist's attention.</p>
+        </header>
+
+        <div class="risk-layout">
+          <ul class="hazard-list">
+            <li class="hazard-list__item">
+              <article class="card hazard-card hazard-card--critical">
+                <span class="card-glow" aria-hidden="true"></span>
+                <header class="hazard-card__header">
+                  <h3 class="hazard-card__title">Fault zone instability</h3>
+                  <span class="severity severity--critical">Critical</span>
+                </header>
+                <p class="hazard-card__text">Steeply dipping fault crosses planned drill path near BH-0412. Ground collapse risk between 210 and 260 m.</p>
+                <p class="hazard-card__meta">Detected 2 hours ago · Zone B</p>
+                <button class="btn btn--ghost btn--sm" type="button">View on map</button>
+              </article>
+            </li>
+            <li class="hazard-list__item">
+              <article class="card hazard-card hazard-card--high">
+                <span class="card-glow" aria-hidden="true"></span>
+                <header class="hazard-card__header">
+                  <h3 class="hazard-card__title">Groundwater intrusion</h3>
+                  <span class="severity severity--high">High</span>
+                </header>
+                <p class="hazard-card__text">Water table readings are 14 m above the regional model in the southern ridge.</p>
+                <p class="hazard-card__meta">Detected yesterday · Zone C</p>
+                <button class="btn btn--ghost btn--sm" type="button">View on map</button>
+              </article>
+            </li>
+            <li class="hazard-list__item">
+              <article class="card hazard-card hazard-card--medium">
+                <span class="card-glow" aria-hidden="true"></span>
+                <header class="hazard-card__header">
+                  <h3 class="hazard-card__title">Assay anomaly</h3>
+                  <span class="severity severity--medium">Medium</span>
+                </header>
+                <p class="hazard-card__text">Sulphur values in five boreholes exceed the expected range. Possible acid drainage source.</p>
+                <p class="hazard-card__meta">Detected 3 days ago · Zone A</p>
+                <button class="btn btn--ghost btn--sm" type="button">View on map</button>
+              </article>
+            </li>
+            <li class="hazard-list__item">
+              <article class="card hazard-card hazard-card--low">
+                <span class="card-glow" aria-hidden="true"></span>
+                <header class="hazard-card__header">
+                  <h3 class="hazard-card__title">Survey data gap</h3>
+                  <span class="severity severity--low">Low</span>
+                </header>
+                <p class="hazard-card__text">No borehole coverage within 800 m of the eastern boundary. Predictions there are less reliable.</p>
+                <p class="hazard-card__meta">Detected last week · Zone A</p>
+                <button class="btn btn--ghost btn--sm" type="button">View on map</button>
+              </article>
+            </li>
+          </ul>
+
+          <figure class="card heatmap" id="heatmap">
+            <span class="card-glow" aria-hidden="true"></span>
+            <figcaption class="heatmap__caption">
+              <h3 class="heatmap__title">Anomaly heatmap</h3>
+              <p class="heatmap__sub">Concentration of flagged readings across the survey area</p>
+            </figcaption>
+            <div class="heatmap__canvas" role="img" aria-label="Heatmap placeholder showing anomaly concentration, with the highest density in the central area">
+              <div class="heatmap__grid" aria-hidden="true"></div>
+              <div class="heatmap__blob heatmap__blob--one" aria-hidden="true"></div>
+              <div class="heatmap__blob heatmap__blob--two" aria-hidden="true"></div>
+              <div class="heatmap__blob heatmap__blob--three" aria-hidden="true"></div>
+            </div>
+            <div class="heatmap__scale">
+              <span class="heatmap__scale-label">Low</span>
+              <span class="heatmap__scale-bar" aria-hidden="true"></span>
+              <span class="heatmap__scale-label">High</span>
+            </div>
+          </figure>
+        </div>
+      </div>
+      <div class="gradient-line" aria-hidden="true"></div>
+    </section>
+
+    <!-- 6. INTERACTIVE GIS DASHBOARD -->
+    <section class="section gis" id="gis" aria-labelledby="gis-title">
+      <div class="container">
+        <header class="section__header">
+          <p class="section__eyebrow">Interactive GIS dashboard</p>
+          <h2 class="section__title" id="gis-title">Explore the survey area</h2>
+          <p class="section__lead">Filter layers, select a borehole and inspect its log without leaving the map.</p>
+        </header>
+
+        <div class="gis-layout">
+          <form class="gis-filters card" aria-labelledby="filters-title">
+            <span class="card-glow" aria-hidden="true"></span>
+            <h3 class="gis-filters__title" id="filters-title">Filters</h3>
+
+            <div class="field">
+              <label class="field__label" for="filter-mineral">Mineral</label>
+              <select class="field__control" id="filter-mineral" name="mineral">
+                <option value="all">All minerals</option>
+                <option value="copper">Copper</option>
+                <option value="gold">Gold</option>
+                <option value="lithium">Lithium</option>
+                <option value="iron">Iron ore</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="filter-depth">Maximum depth: <output class="field__output" id="filter-depth-output" for="filter-depth">500 m</output></label>
+              <input class="field__range" type="range" id="filter-depth" name="depth" min="50" max="1000" step="50" value="500">
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="filter-confidence">Minimum confidence: <output class="field__output" id="filter-confidence-output" for="filter-confidence">60%</output></label>
+              <input class="field__range" type="range" id="filter-confidence" name="confidence" min="0" max="100" step="5" value="60">
+            </div>
+
+            <fieldset class="field field--group">
+              <legend class="field__label">Layers</legend>
+              <label class="check"><input class="check__input" type="checkbox" name="layer" value="boreholes" checked> <span class="check__label">Boreholes</span></label>
+              <label class="check"><input class="check__input" type="checkbox" name="layer" value="geology" checked> <span class="check__label">Geology units</span></label>
+              <label class="check"><input class="check__input" type="checkbox" name="layer" value="faults"> <span class="check__label">Fault lines</span></label>
+              <label class="check"><input class="check__input" type="checkbox" name="layer" value="risk"> <span class="check__label">Risk zones</span></label>
+              <label class="check"><input class="check__input" type="checkbox" name="layer" value="satellite"> <span class="check__label">Satellite overlay</span></label>
+            </fieldset>
+
+            <div class="gis-filters__actions">
+              <button class="btn btn--primary btn--sm" type="button" id="apply-filters">Apply filters</button>
+              <button class="btn btn--ghost btn--sm" type="reset" id="reset-filters">Reset</button>
+            </div>
+          </form>
+
+          <div class="gis-map-wrap card">
+            <span class="card-glow" aria-hidden="true"></span>
+            <div class="gis-map-wrap__frame">
+              <div id="map" class="gis-map" role="application" aria-label="Interactive geological map. Use arrow keys to pan and plus and minus to zoom."></div>
+              <div class="gis-map-wrap__corners" aria-hidden="true"></div>
+            </div>
+
+            <aside class="legend" aria-labelledby="legend-title">
+              <h3 class="legend__title" id="legend-title">Legend</h3>
+              <ul class="legend__list">
+                <li class="legend__item"><span class="legend__swatch legend__swatch--high" aria-hidden="true"></span> High potential</li>
+                <li class="legend__item"><span class="legend__swatch legend__swatch--medium" aria-hidden="true"></span> Medium potential</li>
+                <li class="legend__item"><span class="legend__swatch legend__swatch--low" aria-hidden="true"></span> Low potential</li>
+                <li class="legend__item"><span class="legend__swatch legend__swatch--fault" aria-hidden="true"></span> Fault line</li>
+                <li class="legend__item"><span class="legend__swatch legend__swatch--risk" aria-hidden="true"></span> Risk zone</li>
+              </ul>
+            </aside>
+          </div>
+
+          <aside class="borehole-panel card" id="borehole-panel" aria-labelledby="borehole-title" aria-live="polite">
+            <span class="card-glow" aria-hidden="true"></span>
+            <h3 class="borehole-panel__title" id="borehole-title">Borehole details</h3>
+            <p class="borehole-panel__empty" id="borehole-empty">Select a borehole marker on the map to see its log.</p>
+            <dl class="borehole-panel__list" id="borehole-details">
+              <div class="borehole-panel__row"><dt>ID</dt><dd id="bh-id">BH-0412</dd></div>
+              <div class="borehole-panel__row"><dt>Location</dt><dd id="bh-location">–</dd></div>
+              <div class="borehole-panel__row"><dt>Total depth</dt><dd id="bh-depth">–</dd></div>
+              <div class="borehole-panel__row"><dt>Main lithology</dt><dd id="bh-lithology">–</dd></div>
+              <div class="borehole-panel__row"><dt>Mineral grade</dt><dd id="bh-grade">–</dd></div>
+              <div class="borehole-panel__row"><dt>Confidence</dt><dd id="bh-confidence">–</dd></div>
+            </dl>
+            <div class="borehole-panel__log" aria-hidden="true">
+              <div class="borehole-panel__strata borehole-panel__strata--one"></div>
+              <div class="borehole-panel__strata borehole-panel__strata--two"></div>
+              <div class="borehole-panel__strata borehole-panel__strata--three"></div>
+            </div>
+            <button class="btn btn--ghost btn--sm" type="button" id="bh-add-report">Add to report</button>
+          </aside>
+        </div>
+      </div>
+      <div class="gradient-line" aria-hidden="true"></div>
+    </section>
+
+    <!-- 7. AUTOMATED PDF REPORT GENERATOR -->
+    <section class="section report" id="report" aria-labelledby="report-title">
+      <div class="container">
+        <header class="section__header">
+          <p class="section__eyebrow">Automated report generator</p>
+          <h2 class="section__title" id="report-title">Generate a survey report in one click</h2>
+          <p class="section__lead">Combine predictions, risk findings and map snapshots into a formatted PDF ready for review.</p>
+        </header>
+
+        <div class="report-layout">
+          <article class="card report-preview" aria-labelledby="preview-title">
+            <span class="card-glow" aria-hidden="true"></span>
+            <h3 class="visually-hidden" id="preview-title">Report preview</h3>
+            <div class="report-preview__page">
+              <header class="report-preview__head">
+                <span class="report-preview__logo" aria-hidden="true"></span>
+                <div>
+                  <p class="report-preview__doc-title">Geological survey report</p>
+                  <p class="report-preview__doc-sub">Zone B – Central basin · Copper</p>
+                </div>
+              </header>
+              <div class="gradient-line" aria-hidden="true"></div>
+              <div class="report-preview__body">
+                <div class="report-preview__map" aria-hidden="true"></div>
+                <div class="report-preview__lines" aria-hidden="true">
+                  <span class="report-preview__line"></span>
+                  <span class="report-preview__line"></span>
+                  <span class="report-preview__line report-preview__line--short"></span>
+                  <span class="report-preview__line"></span>
+                  <span class="report-preview__line report-preview__line--short"></span>
+                </div>
+              </div>
+              <footer class="report-preview__foot">
+                <span>Page 1 of 24</span>
+                <span>Generated by OreMap AI</span>
+              </footer>
+            </div>
+          </article>
+
+          <form class="card report-options" aria-labelledby="options-title">
+            <span class="card-glow" aria-hidden="true"></span>
+            <h3 class="report-options__title" id="options-title">Report contents</h3>
+
+            <fieldset class="field field--group">
+              <legend class="visually-hidden">Sections to include</legend>
+              <label class="check"><input class="check__input" type="checkbox" name="section" checked> <span class="check__label">Executive summary</span></label>
+              <label class="check"><input class="check__input" type="checkbox" name="section" checked> <span class="check__label">Mineral predictions</span></label>
+              <label class="check"><input class="check__input" type="checkbox" name="section" checked> <span class="check__label">Risk and anomaly findings</span></label>
+              <label class="check"><input class="check__input" type="checkbox" name="section" checked> <span class="check__label">Map snapshots</span></label>
+              <label class="check"><input class="check__input" type="checkbox" name="section"> <span class="check__label">Borehole appendix</span></label>
+            </fieldset>
+
+            <div class="field">
+              <label class="field__label" for="report-format">Page size</label>
+              <select class="field__control" id="report-format">
+                <option>A4</option>
+                <option>Letter</option>
+              </select>
+            </div>
+
+            <div class="report-options__actions">
+              <button class="btn btn--primary" type="button" id="generate-report">Generate report</button>
+              <button class="btn btn--secondary" type="button" id="download-report" disabled>Download PDF</button>
+            </div>
+            <p class="report-options__status" id="report-status" role="status">No report generated yet.</p>
+          </form>
+        </div>
+      </div>
+      <div class="gradient-line" aria-hidden="true"></div>
+    </section>
+
+    <!-- 8. ASK GEOLOGICAL AI CHATBOT -->
+    <section class="section assistant" id="assistant" aria-labelledby="assistant-title">
+      <div class="container">
+        <header class="section__header">
+          <p class="section__eyebrow">Geological assistant</p>
+          <h2 class="section__title" id="assistant-title">Ask Geological AI</h2>
+          <p class="section__lead">Ask about a borehole, formation or risk. Answers cite the source documents in your workspace.</p>
+        </header>
+
+        <div class="chat card">
+          <span class="card-glow" aria-hidden="true"></span>
+          <header class="chat__header">
+            <span class="chat__avatar" aria-hidden="true"><span class="glow-ring glow-ring--sm"></span></span>
+            <div>
+              <h3 class="chat__title">OreMap AI assistant</h3>
+              <p class="chat__status"><span class="badge__dot" aria-hidden="true"></span> Online</p>
+            </div>
+          </header>
+
+          <div class="chat__window" id="chat-window" role="log" aria-live="polite" aria-label="Conversation with Geological AI" tabindex="0">
+            <div class="message message--bot">
+              <p class="message__author">OreMap AI</p>
+              <p class="message__text">Hello. I can summarise borehole logs, compare zones and explain risk findings. What would you like to know?</p>
+            </div>
+            <div class="message message--user">
+              <p class="message__author">You</p>
+              <p class="message__text">Which zone has the best copper potential?</p>
+            </div>
+            <div class="message message--bot">
+              <p class="message__author">OreMap AI</p>
+              <p class="message__text">Zone B has the highest copper potential, scoring 82 out of 100 with 91% confidence. Note the fault zone near BH-0412 before planning drill paths.</p>
+              <p class="message__source">Sources: BH-0412 log, Survey 2024-07.pdf</p>
+            </div>
+          </div>
+
+          <ul class="chat__suggestions" aria-label="Suggested questions">
+            <li><button class="chip" type="button">Summarise Zone C risks</button></li>
+            <li><button class="chip" type="button">Compare Zone A and B</button></li>
+            <li><button class="chip" type="button">Show deepest boreholes</button></li>
+          </ul>
+
+          <form class="chat__form" id="chat-form" autocomplete="off">
+            <label class="visually-hidden" for="chat-input">Type your question</label>
+            <input class="chat__input" id="chat-input" name="message" type="text" placeholder="Ask about a borehole, formation or risk" required>
+            <button class="btn btn--primary chat__send" type="submit" id="chat-send">Send</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 9. FOOTER -->
+  <footer class="site-footer">
+    <div class="gradient-line" aria-hidden="true"></div>
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">
+        <a class="brand" href="#hero" aria-label="GeoIntel AI home">
+          <span class="brand__mark" aria-hidden="true"><span class="glow-ring"></span></span>
+          <span class="brand__name">OreMap<span class="brand__ai">AI</span></span>
+        </a>
+        <p class="site-footer__text">AI powered geological and mining intelligence for survey teams and agencies.</p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Platform">
+        <h2 class="site-footer__heading">Platform</h2>
+        <ul class="site-footer__list">
+          <li><a class="site-footer__link" href="#ingestion">Data ingestion</a></li>
+          <li><a class="site-footer__link" href="#prediction">Mineral prediction</a></li>
+          <li><a class="site-footer__link" href="#risk">Risk detection</a></li>
+          <li><a class="site-footer__link" href="#gis">GIS dashboard</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__nav" aria-label="Resources">
+        <h2 class="site-footer__heading">Resources</h2>
+        <ul class="site-footer__list">
+          <li><a class="site-footer__link" href="#report">Reports</a></li>
+          <li><a class="site-footer__link" href="#assistant">Assistant</a></li>
+          <li><a class="site-footer__link" href="#hero">Documentation</a></li>
+          <li><a class="site-footer__link" href="#hero">Support</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__nav" aria-label="Legal">
+        <h2 class="site-footer__heading">Legal</h2>
+        <ul class="site-footer__list">
+          <li><a class="site-footer__link" href="#hero">Privacy policy</a></li>
+          <li><a class="site-footer__link" href="#hero">Terms of use</a></li>
+          <li><a class="site-footer__link" href="#hero">Data security</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container site-footer__bottom">
+      <p class="site-footer__copy">&copy; 2026 OreMap AI. All rights reserved.</p>
+      <p class="site-footer__note">Predictions support, and do not replace, professional geological judgement.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="script.js"></script>
+</body>
+</html>
